@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yuka Ishii | Portfolio</title>
+  <style>
+    /* ===== リセット・基本設定 ===== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', 'Hiragino Sans', 'Meiryo', sans-serif;
+      background: #f8f4ff;
+      color: #333;
+      line-height: 1.7;
+    }
+
+    /* ===== ナビゲーション ===== */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 0.8rem 1rem;
+      box-shadow: 0 2px 12px rgba(180, 100, 255, 0.12);
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #7c3aed;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: #ec4899;
+    }
+
+    /* ===== ヒーローセクション ===== */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 1.5rem 4rem;
+      background: linear-gradient(135deg, #a78bfa 0%, #f472b6 50%, #fb923c 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* 背景の装飾円 */
+    #hero::before {
+      content: '';
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.12);
+      top: -80px;
+      left: -100px;
+    }
+
+    #hero::after {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      bottom: -60px;
+      right: -60px;
+    }
+
+    /* アバターアイコン */
+    .avatar {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      margin-bottom: 1.2rem;
+      border: 4px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    }
+
+    #hero h1 {
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      font-weight: 800;
+      color: #fff;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-role {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.25);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 0.3rem 1.2rem;
+      border-radius: 999px;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.08em;
+    }
+
+    .hero-tagline {
+      font-size: clamp(1rem, 3vw, 1.2rem);
+      color: rgba(255, 255, 255, 0.92);
+      max-width: 480px;
+      margin-bottom: 2rem;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.75);
+      animation: bounce 1.6s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(6px); }
+    }
+
+    /* ===== セクション共通 ===== */
+    section {
+      padding: 5rem 1.5rem;
+    }
+
+    .section-inner {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 2.5rem;
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    /* タイトル下の虹色アンダーライン */
+    .section-title::after {
+      content: '';
+      display: block;
+      height: 4px;
+      border-radius: 4px;
+      margin-top: 6px;
+      background: linear-gradient(90deg, #a78bfa, #f472b6, #fb923c);
+    }
+
+    /* ===== Aboutセクション ===== */
+    #about {
+      background: #fff;
+    }
+
+    .about-card {
+      background: linear-gradient(135deg, #fdf4ff, #fff0f6);
+      border-radius: 20px;
+      padding: 2rem 2.5rem;
+      border: 2px solid #e9d5ff;
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: #444;
+    }
+
+    .about-card p + p {
+      margin-top: 1rem;
+    }
+
+    /* ===== Skillsセクション ===== */
+    #skills {
+      background: #f8f4ff;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .skill-card {
+      border-radius: 16px;
+      padding: 1.4rem 1.2rem;
+      text-align: center;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+
+    .skill-card .skill-icon {
+      font-size: 2rem;
+      margin-bottom: 0.6rem;
+    }
+
+    /* カードの色バリエーション */
+    .skill-card:nth-child(1) { background: linear-gradient(135deg, #7c3aed, #a78bfa); }
+    .skill-card:nth-child(2) { background: linear-gradient(135deg, #db2777, #f472b6); }
+    .skill-card:nth-child(3) { background: linear-gradient(135deg, #ea580c, #fb923c); }
+    .skill-card:nth-child(4) { background: linear-gradient(135deg, #0891b2, #67e8f9); }
+
+    /* ===== Hobbiesセクション ===== */
+    #hobbies {
+      background: #fff;
+    }
+
+    .hobbies-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .hobby-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.6rem 1.4rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 1rem;
+      border: 2.5px solid transparent;
+      background-clip: padding-box;
+      position: relative;
+    }
+
+    .hobby-tag::before {
+      content: '';
+      position: absolute;
+      inset: -2.5px;
+      border-radius: inherit;
+      background: linear-gradient(135deg, #a78bfa, #f472b6, #fb923c);
+      z-index: -1;
+    }
+
+    .hobby-tag {
+      background: #fff;
+      color: #7c3aed;
+      z-index: 0;
+    }
+
+    /* ===== フッター ===== */
+    footer {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      background: linear-gradient(135deg, #a78bfa, #f472b6);
+      color: rgba(255,255,255,0.9);
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: #fff;
+      text-underline-offset: 3px;
+    }
+
+    /* ===== フェードインアニメーション ===== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== レスポンシブ ===== */
+    @media (max-width: 480px) {
+      nav { gap: 1.2rem; }
+      .about-card { padding: 1.4rem; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ナビゲーション -->
+  <nav>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#hobbies">Hobbies</a>
+  </nav>
+
+  <!-- ヒーローセクション -->
+  <section id="hero">
+    <div class="avatar">🌸</div>
+    <h1>Yuka Ishii</h1>
+    <span class="hero-role">業務改善チーム</span>
+    <p class="hero-tagline">仕事をもっとスムーズに。<br>ツールと仕組みで、日常をちょっと便利にしていきます。</p>
+    <span class="scroll-hint">↓ scroll</span>
+  </section>
+
+  <!-- Aboutセクション -->
+  <section id="about">
+    <div class="section-inner">
+      <h2 class="section-title">About</h2>
+      <div class="about-card fade-in">
+        <p>
+          はじめまして、Yuka Ishii です！<br>
+          業務改善チームのメンバーとして、日々の業務をより効率よく進めるための仕組みづくりやツール開発に取り組んでいます。
+        </p>
+        <p>
+          「面倒な作業はなくせるはず」という思いを原動力に、GAS や HTML・CSS を活用した自動化・改善提案を続けています。
+          小さな改善の積み重ねが、チーム全体の働きやすさにつながると信じています。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skillsセクション -->
+  <section id="skills">
+    <div class="section-inner">
+      <h2 class="section-title">Skills</h2>
+      <div class="skills-grid fade-in">
+        <div class="skill-card">
+          <div class="skill-icon">⚙️</div>
+          GAS（Google Apps Script）<br>業務自動化スクリプト
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">🖥️</div>
+          Cursor<br>AIを活用した開発
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">🎨</div>
+          HTML / CSS<br>Webページ制作
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">🔍</div>
+          インシデント解決<br>恒久対策の立案・提案
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hobbiesセクション -->
+  <section id="hobbies">
+    <div class="section-inner">
+      <h2 class="section-title">Hobbies</h2>
+      <div class="hobbies-list fade-in">
+        <span class="hobby-tag">💻 プログラミング</span>
+        <span class="hobby-tag">🛠️ ツール開発</span>
+        <span class="hobby-tag">📱 新技術のキャッチアップ</span>
+        <span class="hobby-tag">🤖 AI活用の探求</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- フッター -->
+  <footer>
+    <p>© 2026 Yuka Ishii</p>
+    <p style="margin-top:0.4rem;">
+      <a href="https://github.com/Uka-1126" target="_blank" rel="noopener">GitHub: Uka-1126</a>
+    </p>
+  </footer>
+
+  <!-- スクロールアニメーション用JS -->
+  <script>
+    // 要素が画面に入ったらフェードイン
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
